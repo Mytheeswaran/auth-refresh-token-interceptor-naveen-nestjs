@@ -8,6 +8,11 @@ import {Response} from 'express'
 export class AppController {
   constructor(private readonly authService: AuthService) {}
 
+  @Get('healthCheck')
+  healthCheck(){
+    return 'Health Check Success';
+  }
+
   @Post('auth/login')
   @UseGuards(AuthGuard('local'))
   async login(@Req() req,@Res({passthrough:true}) res:Response) {
