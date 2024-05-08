@@ -13,7 +13,7 @@ export class AppController {
     return 'Health Check Success';
   }
 
-  @Post('auth/login')
+  @Post('api/auth/login')
   @UseGuards(AuthGuard('local'))
   async login(@Req() req,@Res({passthrough:true}) res:Response) {
     const jwtToken = await this.authService.getToken(req.user);
@@ -38,7 +38,7 @@ export class AppController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Get('liked-movies')
+  @Get('api/liked-movies')
   likedMovies(){
     // res.cookie('temp', "hello",{
     //   httpOnly: true,
@@ -48,7 +48,7 @@ export class AppController {
   }
 
   @UseGuards(AuthGuard('refresh-token'))
-  @Get('refresh-token')
+  @Get('api/refresh-token')
   async refreshToken(@Req() req,@Res({passthrough:true}) res:Response){
     const jwtToken = await this.authService.getToken(req.user);
     const secretData = {
@@ -66,7 +66,7 @@ export class AppController {
     return {msg:"success"};
   }
 
-  @Get('logout')
+  @Get('api/logout')
   async logout(@Res({passthrough:true}) res:Response){
     res.clearCookie('auth-cookie');
     return {msg:"success"};
