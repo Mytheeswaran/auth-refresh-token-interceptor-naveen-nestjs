@@ -8,7 +8,7 @@ import {Response} from 'express'
 export class AppController {
   constructor(private readonly authService: AuthService) {}
 
-  @Get('healthCheck')
+  @Get('api/healthCheck')
   healthCheck(){
     return 'Health Check Success';
   }
